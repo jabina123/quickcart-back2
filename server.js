@@ -4,7 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
 const colors = require("colors");
-const connectDB = require("./config/db.js"); 
+const connectDB = require("./config/db.js");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware.js");
 
 // Initialize express app
@@ -18,12 +18,13 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// CORS configuration
+// CORS configuration - UPDATED to your Vercel frontend URL
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://quickfront2.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
+
 
 // Middleware
 app.use(express.json());
@@ -38,8 +39,8 @@ const uploadRoutes = require("./routes/uploadRoutes.js");
 // Use routes
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
- app.use("/api/orders", orderRoutes);
- app.use("/api/upload", uploadRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/upload", uploadRoutes);
 
 // Paypal config route
 app.get("/api/config/paypal", (req, res) => {
