@@ -18,7 +18,8 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// CORS configuration - UPDATED to your Vercel frontend URL
+const cors = require('cors');
+
 app.use(cors({
   origin: 'https://quickfront2.vercel.app',
   credentials: true,
